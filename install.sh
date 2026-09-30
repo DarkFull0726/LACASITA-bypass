@@ -139,18 +139,18 @@ install_fim () {
   msg -ama "               Finalizando Instalacion"
   [[ ! -d ${SCPusr} ]] && mkdir -p ${SCPusr}
   [[ $(find ${SCPusr} -name nombre.log | grep -w "nombre.log" | head -1) ]] || \
-    wget -O ${SCPusr}/nombre.log https://github.com/lacasitamx/VPSMX/raw/master/ArchivosUtilitarios/nombre.log &>/dev/null
+    wget -q -O ${SCPusr}/nombre.log "$REPO/controlador/nombre.log" &>/dev/null
   [[ $(find ${SCPusr} -name IDT.log | grep -w "IDT.log" | head -1) ]] || \
-    wget -O ${SCPusr}/IDT.log https://github.com/lacasitamx/VPSMX/raw/master/ArchivosUtilitarios/IDT.log &>/dev/null
+    wget -q -O ${SCPusr}/IDT.log "$REPO/controlador/IDT.log" &>/dev/null
   [[ $(find ${SCPusr} -name tiemlim.log | grep -w "tiemlim.log" | head -1) ]] || \
-    wget -O ${SCPusr}/tiemlim.log https://github.com/lacasitamx/VPSMX/raw/master/ArchivosUtilitarios/tiemlim.log &>/dev/null
+    wget -q -O ${SCPusr}/tiemlim.log "$REPO/controlador/tiemlim.log" &>/dev/null
   touch /usr/share/lognull &>/dev/null
   wget -q "$REPO/util/SPR" -O /usr/bin/SPR &>/dev/null && chmod 775 /usr/bin/SPR
   [[ -z $(cat /etc/resolv.conf | grep "8.8.8.8") ]] && echo "nameserver 8.8.8.8" >> /etc/resolv.conf
   [[ -z $(cat /etc/resolv.conf | grep "1.1.1.1") ]] && echo "nameserver 1.1.1.1" >> /etc/resolv.conf
   wget -q "$REPO/util/rebootnb" -O /bin/rebootnb &>/dev/null && chmod +x /bin/rebootnb
   wget -q "$REPO/util/resetsshdrop" -O /bin/resetsshdrop &>/dev/null && chmod +x /bin/resetsshdrop
-  wget -q "https://raw.githubusercontent.com/lacasitamx/ZETA/master/sshd" -O /etc/ssh/sshd_config &>/dev/null
+  wget -q "$REPO/util/sshd_config" -O /etc/ssh/sshd_config &>/dev/null
   chmod 777 /etc/ssh/sshd_config
   msg -bar2
   echo '#!/bin/sh -e' > /etc/rc.local
@@ -235,7 +235,7 @@ mkdir -p /usr/local/libreria
 mkdir -p /usr/local/megat
 
 # Archivo de versión
-wget -q "https://raw.githubusercontent.com/lacasitamx/version/master/vercion" -O /etc/versin_script 2>/dev/null || echo "12XB" > /etc/versin_script
+wget -q "$REPO/util/vercion" -O /etc/versin_script 2>/dev/null || echo "12XB" > /etc/versin_script
 cp /etc/versin_script /etc/versin_script_new 2>/dev/null
 
 # --- INSTALACIÓN BYPASS (sin key) ---
