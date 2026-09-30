@@ -265,6 +265,7 @@ wget -q -O ${SCPdir}/tmp/verifi "$REPO/tmp/verifi" &>/dev/null && chmod 777 ${SC
 wget -q -O ${SCPdir}/tmp/monitor "$REPO/tmp/monitor_db" &>/dev/null && chmod 777 ${SCPdir}/tmp/monitor
 wget -q -O ${SCPdir}/tmp/autodes "$REPO/tmp/autodes" &>/dev/null && chmod 777 ${SCPdir}/tmp/autodes
 
+mkdir -p ${SCPdir}/passw
 wget -qO- ipv4.icanhazip.com > ${SCPdir}/IP.log
 rm -rf /usr/bin/menu /usr/bin/VPSMX &>/dev/null
 ln -s ${SCPdir}/menu /usr/bin/menu
