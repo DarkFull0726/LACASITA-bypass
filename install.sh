@@ -150,8 +150,13 @@ install_fim () {
   [[ -z $(cat /etc/resolv.conf | grep "1.1.1.1") ]] && echo "nameserver 1.1.1.1" >> /etc/resolv.conf
   wget -q "$REPO/util/rebootnb" -O /bin/rebootnb &>/dev/null && chmod +x /bin/rebootnb
   wget -q "$REPO/util/resetsshdrop" -O /bin/resetsshdrop &>/dev/null && chmod +x /bin/resetsshdrop
-  wget -q "$REPO/util/sshd_config" -O /etc/ssh/sshd_config &>/dev/null
-  chmod 777 /etc/ssh/sshd_config
+  wget -q "$REPO/util/sshd_config" -O /tmp/sshd_config_new &>/dev/null
+  if sshd -t -f /tmp/sshd_config_new &>/dev/null; then
+    cp /tmp/sshd_config_new /etc/ssh/sshd_config
+    chmod 644 /etc/ssh/sshd_config
+  fi
+  rm -f /tmp/sshd_config_new
+  service ssh restart &>/dev/null
   msg -bar2
   echo '#!/bin/sh -e' > /etc/rc.local
   sudo chmod +x /etc/rc.local
