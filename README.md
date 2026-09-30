@@ -1,4 +1,4 @@
-# LACASITA V12XB — Bypass Edition
+# LACASITA V12XB — Bypass violado Edition
 
 Panel de administración VPS **sin verificación de key**. Versión completamente independiente, todos los archivos alojados en este repo.
 
