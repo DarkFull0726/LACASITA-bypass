@@ -227,6 +227,17 @@ wget -q -O /var/www/html/estilos.css "$REPO/util/estilos.css" &>/dev/null
   ufw allow 81/tcp &>/dev/null
 }
 
+# --- DIRECTORIOS REQUERIDOS POR EL MENU ---
+mkdir -p /usr/local/include/snaps
+mkdir -p /usr/local/lib/sped/tools
+mkdir -p /usr/local/lib/rm
+mkdir -p /usr/local/libreria
+mkdir -p /usr/local/megat
+
+# Archivo de versión
+wget -q "https://raw.githubusercontent.com/lacasitamx/version/master/vercion" -O /etc/versin_script 2>/dev/null || echo "12XB" > /etc/versin_script
+cp /etc/versin_script /etc/versin_script_new 2>/dev/null
+
 # --- INSTALACIÓN BYPASS (sin key) ---
 msg -tit
 msg -ama "          ACTIVANDO BYPASS - SIN KEY REQUERIDA"
